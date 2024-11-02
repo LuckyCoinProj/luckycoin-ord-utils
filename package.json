@@ -1,8 +1,8 @@
 {
   "name": "lky-ord-utils",
-  "version": "0.2.10",
+  "version": "0.0.1",
+  "description": "Ordinals Utils for LuckyCoin",
   "type": "module",
-  "description": "Ordinals Utils",
   "keywords": [
     "bells",
     "keyring"
@@ -28,9 +28,7 @@
   "dependencies": {
     "bn.js": "5.2.1",
     "bs58check": "2.1.2",
-    "luckycoinhdw": "file:.yalc/luckycoinhdw",
-    "luckycoinjs-lib": "file:.yalc/luckycoinjs-lib",
-    "luckycoinpair": "file:.yalc/luckycoinpair"
+    "luckycoinjs-lib": "github:impredmet/luckycoinjs-lib"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.5",

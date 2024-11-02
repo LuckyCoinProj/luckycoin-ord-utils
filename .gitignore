@@ -9,3 +9,5 @@ es
 umd
 .yalc/*
 yalc.lock
+yarn.lock
+.yarn
