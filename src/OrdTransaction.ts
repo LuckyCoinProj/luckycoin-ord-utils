@@ -1,14 +1,13 @@
 import { UTXO_DUST } from "./OrdUnspendOutput.js";
-import { payments, networks, Psbt } from "belcoinjs-lib";
-import type { Network } from "belcoinjs-lib";
-import type { CreateSendBel } from "./types.js";
+import { payments, networks, Psbt } from "luckycoinjs-lib";
+import type { Network } from "luckycoinjs-lib";
+import type { CreateSendLky } from "./types.js";
 
 interface TxInput {
   data: {
     hash: string;
     index: number;
-    witnessUtxo: { value: number; script: Buffer };
-    redeemScript?: Buffer;
+    nonWitnessUtxo: Buffer;
   };
   utxo: UnspentOutput;
 }
@@ -52,11 +51,7 @@ export function utxoToInput(utxo: UnspentOutput, publicKey: Buffer): TxInput {
     const data: TxInput["data"] = {
       hash: utxo.txId,
       index: utxo.outputIndex,
-      witnessUtxo: {
-        value: utxo.satoshis,
-        script: Buffer.from(utxo.scriptPk, "hex"),
-      },
-      redeemScript: redeemData.output,
+      nonWitnessUtxo: Buffer.from(utxo.rawHex, "hex"),
     };
     return {
       data,
@@ -66,10 +61,7 @@ export function utxoToInput(utxo: UnspentOutput, publicKey: Buffer): TxInput {
     const data: TxInput["data"] = {
       hash: utxo.txId,
       index: utxo.outputIndex,
-      witnessUtxo: {
-        value: utxo.satoshis,
-        script: Buffer.from(utxo.scriptPk, "hex"),
-      },
+      nonWitnessUtxo: Buffer.from(utxo.rawHex, "hex"),
     };
     return {
       data,
@@ -82,10 +74,10 @@ export class OrdTransaction {
   private inputs: TxInput[] = [];
   public outputs: TxOutput[] = [];
   private changeOutputIndex = -1;
-  private signTransaction: CreateSendBel["signTransaction"];
-  private calculateFee?: CreateSendBel["calculateFee"];
+  private signTransaction: CreateSendLky["signTransaction"];
+  private calculateFee?: CreateSendLky["calculateFee"];
   public changedAddress: string;
-  private network: Network = networks.bellcoin;
+  private network: Network = networks.luckycoin;
   private feeRate: number;
   private pubkey: string;
   private enableRBF = true;
@@ -96,7 +88,7 @@ export class OrdTransaction {
     calculateFee,
     feeRate,
   }: Pick<
-    CreateSendBel,
+    CreateSendLky,
     "signTransaction" | "network" | "pubkey" | "feeRate" | "calculateFee"
   >) {
     this.signTransaction = signTransaction;
@@ -119,10 +111,7 @@ export class OrdTransaction {
   }
 
   getTotalInput() {
-    return this.inputs.reduce(
-      (pre, cur) => pre + cur.data.witnessUtxo.value,
-      0
-    );
+    return this.inputs.reduce((pre, cur) => pre + cur.utxo.satoshis, 0);
   }
 
   getTotalOutput() {
@@ -156,6 +145,7 @@ export class OrdTransaction {
       }
     });
     const fee = Math.ceil(txSize * this.feeRate);
+
     return fee;
   }
 
@@ -201,10 +191,12 @@ export class OrdTransaction {
 
     psbt.setVersion(1);
     this.inputs.forEach((v, index) => {
+      /*
       if (v.utxo.addressType === AddressType.P2PKH) {
         //@ts-ignore
         psbt.__CACHE.__UNSAFE_SIGN_NONSEGWIT = true;
       }
+        */
       psbt.addInput(v.data);
       if (this.enableRBF) {
         psbt.setInputSequence(index, 0xfffffffd); // support RBF

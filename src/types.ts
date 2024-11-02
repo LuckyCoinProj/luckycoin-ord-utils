@@ -1,5 +1,5 @@
 import type { UnspentOutput, UnspentOutputBase } from "./OrdTransaction.js";
-import type { Network, Psbt } from "belcoinjs-lib";
+import type { Network, Psbt } from "luckycoinjs-lib";
 
 interface CreateSendBase {
   utxos: UnspentOutput[];
@@ -13,7 +13,7 @@ interface CreateSendBase {
   calculateFee?: (tx: string, feeRate: number) => Promise<number>;
 }
 
-export interface CreateSendBel extends CreateSendBase {
+export interface CreateSendLky extends CreateSendBase {
   toAmount: number;
   receiverToPayFee?: boolean;
 }

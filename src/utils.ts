@@ -1,4 +1,4 @@
-import { address, Network, payments, Psbt, Transaction } from "belcoinjs-lib";
+import { address, Network, payments, Psbt, Transaction } from "luckycoinjs-lib";
 import BN from "bn.js";
 import { AddressType, UnspentOutputBase } from "./OrdTransaction.js";
 import { AddInputProps } from "./types.js";
@@ -38,7 +38,7 @@ export const addPsbtInput = ({
   }
   const tx = Transaction.fromHex(utxo.rawHex);
   const outpoint = tx.outs[utxo.outputIndex];
-  const addressStr = address.fromOutputScript(outpoint.script, network);
+  const addressStr = address.fromOutputScript(outpoint.script);
   const addressType = getAddressType(addressStr, network);
 
   let input: any = {

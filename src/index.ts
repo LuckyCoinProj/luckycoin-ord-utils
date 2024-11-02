@@ -7,12 +7,12 @@ import { UTXO_DUST } from "./OrdUnspendOutput.js";
 import { addPsbtInput, calculateFee, satoshisToAmount } from "./utils.js";
 import type {
   CreateSendOrd,
-  CreateSendBel,
+  CreateSendLky,
   CreateMultiSendOrd,
 } from "./types.js";
-import { networks, Psbt } from "belcoinjs-lib";
+import { networks, Psbt } from "luckycoinjs-lib";
 
-export async function createSendBEL({
+export async function createSendLKY({
   utxos,
   toAddress,
   toAmount,
@@ -24,7 +24,7 @@ export async function createSendBEL({
   pubkey,
   calculateFee,
   enableRBF = true,
-}: CreateSendBel) {
+}: CreateSendLky) {
   const tx = new OrdTransaction({
     signTransaction,
     network,
@@ -83,7 +83,7 @@ export async function createSendBEL({
       throw new Error(
         `Balance not enough. Need ${satoshisToAmount(
           networkFee
-        )} BTC as network fee`
+        )} LKY as network fee`
       );
     }
     output.value -= networkFee;
@@ -101,7 +101,7 @@ export async function createSendBEL({
       throw new Error(
         `Balance not enough. Need ${satoshisToAmount(
           networkFee
-        )} BEL as network fee, but only ${satoshisToAmount(unspent)} BEL.`
+        )} LKY as network fee, but only ${satoshisToAmount(unspent)} LKY.`
       );
     }
 
@@ -205,7 +205,7 @@ export async function createSendOrd({
     throw new Error(
       `Balance not enough. Need ${satoshisToAmount(
         networkFee
-      )} BEL as network fee, but only ${satoshisToAmount(unspent)} BEL`
+      )} LKY as network fee, but only ${satoshisToAmount(unspent)} LKY`
     );
   }
 
@@ -226,7 +226,7 @@ export async function createMultisendOrd({
   utxos,
   toAddress,
   signPsbtHex,
-  network = networks.bellcoin,
+  network = networks.luckycoin,
   changeAddress,
   publicKey,
   feeRate,

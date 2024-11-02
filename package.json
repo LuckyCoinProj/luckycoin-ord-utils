@@ -1,5 +1,5 @@
 {
-  "name": "bel-ord-utils",
+  "name": "lky-ord-utils",
   "version": "0.2.10",
   "type": "module",
   "description": "Ordinals Utils",
@@ -23,12 +23,14 @@
     "/lib"
   ],
   "scripts": {
-    "build": "rm -rf lib && tsc"
+    "build": "tsc"
   },
   "dependencies": {
-    "belcoinjs-lib": "0.1.2",
     "bn.js": "5.2.1",
-    "bs58check": "2.1.2"
+    "bs58check": "2.1.2",
+    "luckycoinhdw": "file:.yalc/luckycoinhdw",
+    "luckycoinjs-lib": "file:.yalc/luckycoinjs-lib",
+    "luckycoinpair": "file:.yalc/luckycoinpair"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.5",
