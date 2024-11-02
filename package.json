@@ -4,7 +4,7 @@
   "description": "Ordinals Utils for LuckyCoin",
   "type": "module",
   "keywords": [
-    "bells",
+    "luckycoin",
     "keyring"
   ],
   "homepage": "https://github.com/unisat-wallet/ord-utils#readme",
