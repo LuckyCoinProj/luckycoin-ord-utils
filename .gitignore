@@ -8,4 +8,5 @@ docs/source/_build
 lib
 es 
 umd
-.yalc
+.yalc/*
+yalc.lock
