@@ -1,5 +1,5 @@
 {
-  "name": "lky-ord-utils",
+  "name": "luckycoin-ord-utils",
   "version": "0.0.1",
   "description": "Ordinals Utils for LuckyCoin",
   "type": "module",
