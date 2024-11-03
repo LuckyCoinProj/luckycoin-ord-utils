@@ -28,7 +28,7 @@
   "dependencies": {
     "bn.js": "5.2.1",
     "bs58check": "2.1.2",
-    "luckycoinjs-lib": "github:impredmet/luckycoinjs-lib"
+    "luckycoinjs-lib": "^0.0.2"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.5",
