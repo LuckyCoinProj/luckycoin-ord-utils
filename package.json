@@ -1,6 +1,6 @@
 {
   "name": "luckycoin-ord-utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Ordinals Utils for LuckyCoin",
   "type": "module",
   "keywords": [
@@ -28,7 +28,7 @@
   "dependencies": {
     "bn.js": "5.2.1",
     "bs58check": "2.1.2",
-    "luckycoinjs-lib": "^0.0.2"
+    "luckycoinjs-lib": "^0.0.3"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.5",
